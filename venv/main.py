@@ -1,4 +1,10 @@
 import random
+import sys
+import os
+import re
+import io, csv
+from tkinter import *
+from tkinter import filedialog
 
 #variables
 choices = []
@@ -39,38 +45,38 @@ A = Tile("A", "a", "a")
 T = Tile("T", "a", "")
 
 #gather counts for the tile types
-sCount = input("Enter S count: ")
-aCount = input("Enter A count: ")
-tCount = input("Enter T count: ")
+sCount = int(sys.argv[1])
+print(sCount)
+aCount = int(sys.argv[2])
+print(aCount)
+tCount = int(sys.argv[3])
+print(tCount)
+
+finalList = []
 
 #place that many tiles into its respective list
 #S list
-sList = []
 for tileCount in range(int(sCount)):
-    sList.append(S)
+    finalList.append(S)
 #A list
-aList = []
 for tileCount in range(int(aCount)):
-    aList.append(A)
+    finalList.append(A)
 #T list
-tList = []
 for tileCount in range(int(tCount)):
-    tList.append(T)
-#concat all lists into a final big list
-finalList = sList + aList + tList
+    finalList.append(T)
 
 #debugging
-print(len(sList), " ", len(aList), " ", len(tList))
-print(len(finalList))
+#print(len(sList), " ", len(aList), " ", len(tList))
+#print(len(finalList))
 
 #select two items at random from the list
 choices = random.choices(finalList, k=2)
 
 #can they be glued together?
-if tilesCanBeGlued(choices):
-    
+#if tilesCanBeGlued(choices):
+
 #printing out what was chosen (debug)
-for choice in choices:
-    finalList.remove(choice)
-    print(choice)
-print(len(finalList))
+#for choice in choices:
+#    finalList.remove(choice)
+#    print(choice)
+#print(len(finalList))
