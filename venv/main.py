@@ -8,7 +8,8 @@ from tkinter import filedialog
 
 #variables
 choices = []
-lines = []
+templist = []
+#lines = []
 
 #tile class with tile type and glues
 class Tile:
@@ -46,13 +47,14 @@ T = Tile("T", "a", "")
 
 #gather counts for the tile types
 sCount = int(sys.argv[1])
-print(sCount)
+#print(sCount)
 aCount = int(sys.argv[2])
-print(aCount)
+#print(aCount)
 tCount = int(sys.argv[3])
-print(tCount)
+#print(tCount)
 
 finalList = []
+finalList2 = []
 
 #place that many tiles into its respective list
 #S list
@@ -69,14 +71,31 @@ for tileCount in range(int(tCount)):
 #print(len(sList), " ", len(aList), " ", len(tList))
 #print(len(finalList))
 
-#select two items at random from the list
-choices = random.choices(finalList, k=2)
 
-#can they be glued together?
-#if tilesCanBeGlued(choices):
+for n in range(5):
+    #loop selecting two items at random from the list
+    choices = random.choices(finalList, k=2)
+
+    #can they be glued together?
+    if tilesCanBeGlued(choices):
+        #Glue both tiles, and put them back into final list.
+        #Note that each side is glued to the other tile, updating this info.
+        #put into list, then stick inside final list.
+        templist = [choices]
+        #remove choices from finalList
+        for choice in choices:
+            finalList.remove(choice)
+        
+        finalList.append(templist)
+
+#Note ST lines.
+for f in finalList:
+    #Check if line & first and last tile.
+    print(Tile.getTiletype(choice))
 
 #printing out what was chosen (debug)
-#for choice in choices:
-#    finalList.remove(choice)
-#    print(choice)
+# choices = random.choices(finalList, k=2)
+# for choice in choices:
+#    #finalList.remove(choice)
+#    print(Tile.getTiletype(choice))
 #print(len(finalList))
