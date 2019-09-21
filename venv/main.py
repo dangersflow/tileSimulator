@@ -9,7 +9,8 @@ from tkinter import filedialog
 #variables
 choices = []
 templist = []
-#lines = []
+stLines = []
+averagesList = []
 
 #tile class with tile type and glues
 class Tile:
@@ -43,7 +44,7 @@ def tilesCanBeGlued(_choices):
                 and _choices[0][0].getWestGlue() != ""):
             #rearrange tiles
             #debug
-            print(choices[0], choices[1])
+            #print(choices[0], choices[1])
             choices = [_choices[1], _choices[0]]
             return True
         else:
@@ -57,7 +58,7 @@ def tilesCanBeGlued(_choices):
                 and _choices[0].getWestGlue() != ""):
             #rearrange tiles
             #debug
-            print(choices[0], choices[1])
+            #print(choices[0], choices[1])
             choices = [_choices[1], _choices[0]]
             return True
         else:
@@ -71,7 +72,7 @@ def tilesCanBeGlued(_choices):
                 and _choices[0][0].getWestGlue() != ""):
             #rearrange tiles
             #debug
-            print(choices[0], choices[1])
+            #print(choices[0], choices[1])
             choices = [_choices[1], _choices[0]]
             return True
         else:
@@ -85,7 +86,7 @@ def tilesCanBeGlued(_choices):
         0].getWestGlue() != ""):
         # rearrange both tiles
         # debug
-        print(choices[0], choices[1])
+        #print(choices[0], choices[1])
         choices = [_choices[1], _choices[0]]
         return True
     else:
@@ -106,60 +107,92 @@ aCount = int(sys.argv[2])
 tCount = int(sys.argv[3])
 #print(tCount)
 
-
-''' debug using console
+'''
+# debug using console
 sCount = input("S: ")
 aCount = input("A: ")
 tCount = input("T: ")
 '''
-finalList = []
-finalList2 = []
 
-#place that many tiles into its respective list
-#S list
-for tileCount in range(int(sCount)):
-    finalList.append(S)
-#A list
-for tileCount in range(int(aCount)):
-    finalList.append(A)
-#T list
-for tileCount in range(int(tCount)):
-    finalList.append(T)
+#number of tests
+for x in range(100):
+    finalList = []
+    finalList2 = []
+    stLines = []
 
-#debugging
-#print(len(sList), " ", len(aList), " ", len(tList))
-#print(len(finalList))
+    #place that many tiles into its respective list
+    #S list
+    for tileCount in range(int(sCount)):
+        finalList.append(S)
+    #A list
+    for tileCount in range(int(aCount)):
+        finalList.append(A)
+    #T list
+    for tileCount in range(int(tCount)):
+        finalList.append(T)
+
+    #print(finalList)
+
+    #debugging
+    #print(len(sList), " ", len(aList), " ", len(tList))
+    print(len(finalList))
+
+    for n in range(5000):
+
+        #if there's nothing in finalList, that means all tiles glued to each other; break
+        if(len(finalList) < 2):
+            break
+
+        #loop selecting two items at random from the list
+        choices = random.sample(finalList, 2)
+
+        #can they be glued together?
+        if tilesCanBeGlued(choices):
+            #Glue both tiles, and put them back into final list.
+            #Note that each side is glued to the other tile, updating this info.
+            #put into list, then stick inside final list.
+            templist = choices
+            #remove choices from finalList
+            for choice in choices:
+                finalList.remove(choice)
+            #create one full array from templist, if templist contains a list
+            finalTempList = []
+            if(isinstance(templist[0], list) or isinstance(templist[1], list)):
+                for set in choices:
+                    if(isinstance(set, list)):
+                        for tile in set:
+                            finalTempList.append(tile)
+                    else:
+                        finalTempList.append(set)
+            else:
+                finalTempList = templist
+
+            #if we glue two things together, and it becomes an ST line, send it to an ST line list
+            if(finalTempList[0].getTiletype() == "S" and finalTempList[-1].getTiletype() == "T"):
+                stLines.append(finalTempList)
+            else:
+                finalList.append(finalTempList)
 
 
-for n in range(5000):
-    #loop selecting two items at random from the list
-    choices = random.choices(finalList, k=2)
+    #Note ST lines.
+    print(finalList)
 
-    #can they be glued together?
-    if tilesCanBeGlued(choices):
-        #Glue both tiles, and put them back into final list.
-        #Note that each side is glued to the other tile, updating this info.
-        #put into list, then stick inside final list.
-        templist = choices
-        #remove choices from finalList
-        for choice in choices:
-            finalList.remove(choice)
-        #create one full array from templist, if templist contains a list
-        finalTempList = []
-        if(isinstance(templist[0], list) or isinstance(templist[1], list)):
-            for set in choices:
-                if(isinstance(set, list)):
-                    for tile in set:
-                        finalTempList.append(tile)
-                else:
-                    finalTempList.append(set)
-        else:
-            finalTempList = templist
+    print(stLines)
 
-        finalList.append(finalTempList)
+    #calculate average of st lines
+    sum = 0
+    for line in stLines:
+        sum += len(line)
+    average = sum / len(stLines)
+    print("Average length of ST Lines: ", str(average))
+    averagesList.append(average)
 
-#Note ST lines.
-print(finalList)
+#calculate average of averages
+avgSum = 0
+for avg in averagesList:
+    avgSum += avg
+mainAverage = avgSum / len(averagesList)
+print("Average of all averages: ", mainAverage)
 
 #printing out what was chosen (debug)
 # choices = random.choices(finalList, k=2)
