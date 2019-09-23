@@ -5,6 +5,7 @@ import re
 import io, csv
 from tkinter import *
 from tkinter import filedialog
+import matplotlib.pyplot as pltl
 
 #variables
 choices = []
@@ -101,7 +102,7 @@ T = Tile("T", "a", "")
 #grab values from gui
 #gather counts for the tile types
 sCount = int(sys.argv[1])
-#print(sCount)
+print(sCount)
 aCount = int(sys.argv[2])
 #print(aCount)
 tCount = int(sys.argv[3])
@@ -175,9 +176,9 @@ for x in range(100):
 
 
     #Note ST lines.
-    print(finalList)
+    #print(finalList)
 
-    print(stLines)
+    #print(stLines)
 
     #calculate average of st lines
     sum = 0
