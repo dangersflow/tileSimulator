@@ -116,7 +116,7 @@ tCount = input("T: ")
 '''
 
 #number of tests
-for x in range(100):
+for x in range(1000):
     finalList = []
     finalList2 = []
     stLines = []
@@ -138,7 +138,7 @@ for x in range(100):
     #print(len(sList), " ", len(aList), " ", len(tList))
     print(len(finalList))
 
-    for n in range(5000):
+    for n in range((sCount + tCount) * aCount):
 
         #if there's nothing in finalList, that means all tiles glued to each other; break
         if(len(finalList) < 2):
