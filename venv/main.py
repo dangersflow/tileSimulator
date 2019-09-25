@@ -6,12 +6,15 @@ import io, csv
 from tkinter import *
 from tkinter import filedialog
 import matplotlib.pyplot as pltl
+from collections import defaultdict
 
 #variables
 choices = []
 templist = []
 stLines = []
 averagesList = []
+maxlengthList = []
+d = defaultdict(int)
 
 #tile class with tile type and glues
 class Tile:
@@ -136,7 +139,7 @@ for x in range(100):
 
     #debugging
     #print(len(sList), " ", len(aList), " ", len(tList))
-    print(len(finalList))
+    #print(len(finalList))
 
     for n in range(5000):
 
@@ -175,18 +178,18 @@ for x in range(100):
                 finalList.append(finalTempList)
 
 
-    #Note ST lines.
-    #print(finalList)
-
-    #print(stLines)
-
-    #calculate average of st lines
     sum = 0
+    maxlength = 2
     for line in stLines:
         sum += len(line)
+        # if len(line) > maxlength:
+        #     maxlength = len(line)
+        #Depending on len(line), add one to their respective number in list.
+        d[len(line)] = d[len(line)] + 1
     average = sum / len(stLines)
-    print("Average length of ST Lines: ", str(average))
+    #print("Average length of ST Lines: ", str(average))
     averagesList.append(average)
+    maxlengthList.append(max(stLines, key = len))
 
 #calculate average of averages
 avgSum = 0
@@ -194,6 +197,15 @@ for avg in averagesList:
     avgSum += avg
 mainAverage = avgSum / len(averagesList)
 print("Average of all averages: ", mainAverage)
+
+#calculate max length of ST lines
+maxlength = max(maxlengthList, key = len)
+maxlength = len(maxlength)
+print("Max length: ", maxlength)
+print("Number of lines of st length: ", d.items())
+
+plt.plot(range(2, maxlength+1), d)
+plt.show()
 
 #printing out what was chosen (debug)
 # choices = random.choices(finalList, k=2)
