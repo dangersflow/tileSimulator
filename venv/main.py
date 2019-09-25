@@ -139,9 +139,9 @@ for x in range(1000):
 
     #debugging
     #print(len(sList), " ", len(aList), " ", len(tList))
-    #print(len(finalList))
+    #print(finalList)
 
-    for n in range((sCount + tCount) * aCount):
+    for n in range((sCount + tCount) * aCount * aCount):
 
         #if there's nothing in finalList, that means all tiles glued to each other; break
         if(len(finalList) < 2):
