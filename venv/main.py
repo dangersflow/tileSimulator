@@ -105,7 +105,7 @@ T = Tile("T", "a", "")
 #grab values from gui
 #gather counts for the tile types
 sCount = int(sys.argv[1])
-print(sCount)
+#print(sCount)
 aCount = int(sys.argv[2])
 #print(aCount)
 tCount = int(sys.argv[3])
@@ -178,12 +178,12 @@ for x in range(1000):
                 finalList.append(finalTempList)
 
 
-    sum = 0
+    sums = 0
     maxlength = 2
     for line in stLines:
-        sum += len(line)
+        sums += len(line)
         d[len(line)] = d[len(line)] + 1
-    average = sum / len(stLines)
+    average = sums / len(stLines)
     #print("Average length of ST Lines: ", str(average))
     averagesList.append(average)
     #maxlengthList.append(max(stLines, key = len))
@@ -201,13 +201,26 @@ print("Average of all averages: ", mainAverage)
 #print("Max length: ", maxlength)
 print("Number of lines of st length: ", d.items())
 
+#Sort dictionary by key, return list of tuples.
 lists = sorted(d.items())
+#Unpack a list of pairs into two tuples.
 x, y = zip(*lists)
+
+#Calculate percentages for comparison.
+values = d.values()
+total = sum(values)
+#new = [value * 100. / total for value in values]
+#print(new)
 
 pltl.bar(x, y)
 pltl.xlabel("Length of ST Lines")
 pltl.ylabel("Number of ST Lines per Length")
+
+for i, v in enumerate(y):
+    pltl.text(i + 2, v + .22, "{}%".format((v * 100.)/total), color='blue', fontweight='bold')
+
 pltl.show()
+#pltl.savefig("STSim.png")
 
 #printing out what was chosen (debug)
 # choices = random.choices(finalList, k=2)
