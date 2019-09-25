@@ -13,7 +13,7 @@ choices = []
 templist = []
 stLines = []
 averagesList = []
-maxlengthList = []
+#maxlengthList = []
 d = defaultdict(int)
 
 #tile class with tile type and glues
@@ -182,14 +182,11 @@ for x in range(1000):
     maxlength = 2
     for line in stLines:
         sum += len(line)
-        # if len(line) > maxlength:
-        #     maxlength = len(line)
-        #Depending on len(line), add one to their respective number in list.
         d[len(line)] = d[len(line)] + 1
     average = sum / len(stLines)
     #print("Average length of ST Lines: ", str(average))
     averagesList.append(average)
-    maxlengthList.append(max(stLines, key = len))
+    #maxlengthList.append(max(stLines, key = len))
 
 #calculate average of averages
 avgSum = 0
@@ -199,13 +196,18 @@ mainAverage = avgSum / len(averagesList)
 print("Average of all averages: ", mainAverage)
 
 #calculate max length of ST lines
-maxlength = max(maxlengthList, key = len)
-maxlength = len(maxlength)
-print("Max length: ", maxlength)
+#maxlength = max(maxlengthList, key = len)
+#maxlength = len(maxlength)
+#print("Max length: ", maxlength)
 print("Number of lines of st length: ", d.items())
 
-plt.plot(range(2, maxlength+1), d)
-plt.show()
+lists = sorted(d.items())
+x, y = zip(*lists)
+
+pltl.bar(x, y)
+pltl.xlabel("Length of ST Lines")
+pltl.ylabel("Number of ST Lines per Length")
+pltl.show()
 
 #printing out what was chosen (debug)
 # choices = random.choices(finalList, k=2)
