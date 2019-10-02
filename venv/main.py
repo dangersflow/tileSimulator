@@ -142,7 +142,7 @@ for x in range(10000):
 
     #debugging
     #print(len(sList), " ", len(aList), " ", len(tList))
-    #print(len(finalList))
+    #print(finalList)
 
     for n in range((sCount + tCount) * aCount * aCount):
 
