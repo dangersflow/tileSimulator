@@ -12,7 +12,7 @@ def done():
     selection.append(var3.get())
     coffee = os.getcwd() + "/main.py "
     # print(coffee)
-    temp = 'python3 ' + coffee + " " + str(selection[0]) + " " + str(selection[1]) + " " + str(selection[2])
+    temp = 'python ' + coffee + " " + str(selection[0]) + " " + str(selection[1]) + " " + str(selection[2])
     # print(temp)
     os.system(temp)
     selection.clear()

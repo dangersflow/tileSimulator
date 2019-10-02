@@ -102,6 +102,7 @@ S = Tile("S", "", "a")
 A = Tile("A", "a", "a")
 T = Tile("T", "a", "")
 
+
 #grab values from gui
 #gather counts for the tile types
 sCount = int(sys.argv[1])
@@ -113,13 +114,13 @@ tCount = int(sys.argv[3])
 
 '''
 # debug using console
-sCount = input("S: ")
-aCount = input("A: ")
-tCount = input("T: ")
+sCount = int(input("S: "))
+aCount = int(input("A: "))
+tCount = int(input("T: "))
 '''
 
 #number of tests
-for x in range(1000):
+for x in range(10000):
     finalList = []
     finalList2 = []
     stLines = []
@@ -135,13 +136,15 @@ for x in range(1000):
     for tileCount in range(int(tCount)):
         finalList.append(T)
 
+    random.shuffle(finalList)
+
     #print(finalList)
 
     #debugging
     #print(len(sList), " ", len(aList), " ", len(tList))
     #print(len(finalList))
 
-    for n in range((sCount + tCount) * aCount):
+    for n in range((sCount + tCount) * aCount * aCount):
 
         #if there's nothing in finalList, that means all tiles glued to each other; break
         if(len(finalList) < 2):
@@ -188,6 +191,10 @@ for x in range(1000):
     averagesList.append(average)
     #maxlengthList.append(max(stLines, key = len))
 
+    print(finalList)
+    print(stLines)
+    print("Average Length of ST lines: ", str(average))
+
 #calculate average of averages
 avgSum = 0
 for avg in averagesList:
@@ -199,7 +206,7 @@ print("Average of all averages: ", mainAverage)
 #maxlength = max(maxlengthList, key = len)
 #maxlength = len(maxlength)
 #print("Max length: ", maxlength)
-print("Number of lines of st length: ", d.items())
+print("Number of lines of st length: ", sorted(d.items()))
 
 #Sort dictionary by key, return list of tuples.
 lists = sorted(d.items())
@@ -211,6 +218,11 @@ values = d.values()
 total = sum(values)
 #new = [value * 100. / total for value in values]
 #print(new)
+
+print("Length of lines and percentages:")
+
+for i, v in enumerate(y):
+    print(i+2, (v * 100.)/total)
 
 pltl.bar(x, y)
 pltl.xlabel("Length of ST Lines")
