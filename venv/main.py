@@ -114,6 +114,7 @@ aCount = int(sys.argv[2])
 tCount = int(sys.argv[3])
 #print(tCount)
 
+
 '''
 # debug using console
 sCount = int(input("S: "))
@@ -126,6 +127,10 @@ for x in range(trials):
     finalList = []
     finalList2 = []
     stLines = []
+    #S counter
+    sCounter = sCount
+    #T counter
+    tCounter = tCount
 
     #place that many tiles into its respective list
     #S list
@@ -146,11 +151,11 @@ for x in range(trials):
     #print(len(sList), " ", len(aList), " ", len(tList))
     #print(finalList)
 
-    for n in range((sCount + tCount) * aCount * aCount):
+    while sCounter > 0 and tCounter > 0:
 
         #if there's nothing in finalList, that means all tiles glued to each other; break
-        if(len(finalList) < 2):
-            break
+        #if(len(finalList) < 2):
+        #    break
 
         #loop selecting two items at random from the list
         choices = random.sample(finalList, 2)
@@ -179,6 +184,8 @@ for x in range(trials):
             #if we glue two things together, and it becomes an ST line, send it to an ST line list
             if(finalTempList[0].getTiletype() == "S" and finalTempList[-1].getTiletype() == "T"):
                 stLines.append(finalTempList)
+                sCounter -= 1
+                tCounter -= 1
             else:
                 finalList.append(finalTempList)
 
