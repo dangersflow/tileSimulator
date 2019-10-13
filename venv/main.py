@@ -8,6 +8,8 @@ from tkinter import filedialog
 import matplotlib.pyplot as pltl
 from collections import defaultdict
 
+trials = int(sys.argv[4])
+
 #variables
 choices = []
 templist = []
@@ -120,7 +122,7 @@ tCount = int(input("T: "))
 '''
 
 #number of tests
-for x in range(10000):
+for x in range(trials):
     finalList = []
     finalList2 = []
     stLines = []
