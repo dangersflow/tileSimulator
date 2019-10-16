@@ -7,7 +7,6 @@ from tkinter import *
 from tkinter import filedialog
 import matplotlib.pyplot as pltl
 from collections import defaultdict
-import gui
 
 trials = int(sys.argv[4])
 
@@ -243,7 +242,6 @@ pltl.ylabel("Number of ST Lines per Length")
 
 for i, v in enumerate(y):
     pltl.text(i + 2, v + .22, "{0:.2f}%".format((v * 100.)/total), color='blue', fontweight='bold', size = 7)
-
 
 
 pltl.show()

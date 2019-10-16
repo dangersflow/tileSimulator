@@ -54,6 +54,4 @@ button = Button(topFrame, width = 20, text = "Start", command = done)
 button.grid(column = 1, row = 2, pady = (100, 0))
 
 
-
-
 window.mainloop()
