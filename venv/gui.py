@@ -13,7 +13,7 @@ def done():
     selection.append(var4.get())
     coffee = os.getcwd() + "/main.py "
     # print(coffee)
-    temp = 'python ' + coffee + " " + str(selection[0]) + " " + str(selection[1]) + " " + str(selection[2]) + " " + str(selection[3])
+    temp = 'python3 ' + coffee + " " + str(selection[0]) + " " + str(selection[1]) + " " + str(selection[2]) + " " + str(selection[3])
     # print(temp)
     os.system(temp)
     selection.clear()
@@ -46,7 +46,7 @@ scale2.grid(column = 1, row = 1, pady = 50)
 scale3 = Scale(topFrame, length = 200, variable = var3, label = "T")
 scale3.grid(column = 2, row = 1, pady = 50)
 
-scale4 = Scale(topFrame, length = 200, variable = var4, label = "Number of Trials", orient = HORIZONTAL)
+scale4 = Scale(topFrame, length = 200, variable = var4, label = "Number of Trials", orient = HORIZONTAL, to = 10000)
 scale4.grid(column = 1, row = 2)
 
 #Button that launches main.py & passes values to it.

@@ -7,6 +7,7 @@ from tkinter import *
 from tkinter import filedialog
 import matplotlib.pyplot as pltl
 from collections import defaultdict
+import gui
 
 trials = int(sys.argv[4])
 
@@ -236,9 +237,14 @@ for i, v in enumerate(y):
 pltl.bar(x, y)
 pltl.xlabel("Length of ST Lines")
 pltl.ylabel("Number of ST Lines per Length")
+#pltl.autoscale()
+# fig, ax = pltl.subplots()
+# ax.autoscale(enable=True)
 
 for i, v in enumerate(y):
-    pltl.text(i + 2, v + .22, "{}%".format((v * 100.)/total), color='blue', fontweight='bold')
+    pltl.text(i + 2, v + .22, "{0:.2f}%".format((v * 100.)/total), color='blue', fontweight='bold', size = 7)
+
+
 
 pltl.show()
 #pltl.savefig("STSim.png")
