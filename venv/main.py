@@ -5,8 +5,10 @@ import re
 import io, csv
 from tkinter import *
 from tkinter import filedialog
+from tkinter import ttk
 import matplotlib.pyplot as pltl
 from collections import defaultdict
+#from gui import progressbar
 
 trials = int(sys.argv[4])
 
@@ -17,6 +19,16 @@ stLines = []
 averagesList = []
 #maxlengthList = []
 d = defaultdict(int)
+
+# def progress(currentValue):
+#     progressbar["value"]=currentValue
+#
+# maxValue = trials
+# currentValue=0
+# progressbar["value"]=currentValue
+# progressbar["maximum"]=maxValue
+
+
 
 #tile class with tile type and glues
 class Tile:
@@ -199,7 +211,8 @@ for x in range(trials):
     #print("Average length of ST Lines: ", str(average))
     averagesList.append(average)
     #maxlengthList.append(max(stLines, key = len))
-
+    progress.after(100, progress(currentValue))
+    progressbar.update()
     print(finalList)
     print(stLines)
     print("Average Length of ST lines: ", str(average))
