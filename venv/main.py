@@ -8,6 +8,7 @@ from tkinter import filedialog
 from tkinter import ttk
 import matplotlib.pyplot as pltl
 from collections import defaultdict
+import numpy as np
 #from gui import progressbar
 
 trials = int(sys.argv[4])
@@ -211,11 +212,15 @@ for x in range(trials):
     #print("Average length of ST Lines: ", str(average))
     averagesList.append(average)
     #maxlengthList.append(max(stLines, key = len))
-    progress.after(100, progress(currentValue))
-    progressbar.update()
+    #progress.after(100, progress(currentValue))
+    #progressbar.update()
     print(finalList)
     print(stLines)
     print("Average Length of ST lines: ", str(average))
+
+#TEST
+#divide number of lines counted by number of trials to get average count
+
 
 #calculate average of averages
 avgSum = 0
@@ -232,6 +237,7 @@ print("Number of lines of st length: ", sorted(d.items()))
 
 #Sort dictionary by key, return list of tuples.
 lists = sorted(d.items())
+print(lists)
 #Unpack a list of pairs into two tuples.
 x, y = zip(*lists)
 
@@ -243,21 +249,22 @@ total = sum(values)
 
 print("Length of lines and percentages:")
 
-for i, v in enumerate(y):
-    print(i+2, (v * 100.)/total)
+#for i, v in enumerate(y):
+#    print(i+2, (v * 100.)/total)
 
-pltl.bar(x, y)
-pltl.xlabel("Length of ST Lines")
-pltl.ylabel("Number of ST Lines per Length")
+#pltl.bar(x, y)
+#pltl.xlabel("Length of ST Lines")
+#pltl.ylabel("Number of ST Lines per Length")
 #pltl.autoscale()
 # fig, ax = pltl.subplots()
 # ax.autoscale(enable=True)
 
-for i, v in enumerate(y):
-    pltl.text(i + 2, v + .22, "{0:.2f}%".format((v * 100.)/total), color='blue', fontweight='bold', size = 7)
+
+#for i, v in enumerate(y):
+#    pltl.text(i + 2, v + .22, "{0:.2f}%".format((v * 100.)/total), color='blue', fontweight='bold', size = 7)
 
 
-pltl.show()
+#pltl.show()
 #pltl.savefig("STSim.png")
 
 #printing out what was chosen (debug)
@@ -266,3 +273,29 @@ pltl.show()
 #    #finalList.remove(choice)
 #    print(Tile.getTiletype(choice))
 #print(len(finalList))
+
+
+#TEST
+width = 0.85
+fig, ax = pltl.subplots()
+rects1 = ax.bar(x, y, color='b', width=0.8)
+
+ax.set_ylabel('Number of ST Lines per Length')
+ax.set_title('Insert Title Here')
+#ax.set_xticks(np.add(x,(width/2))) # set the position of the x ticks
+#ax.set_xticklabels(x)
+#ax.autoscale(enable=True)
+
+
+def autolabel(rects):
+    # attach some text labels
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                "{0:.1f}%".format((height * 100)/total),
+                ha='center', va='bottom', size=5)
+
+autolabel(rects1)
+
+pltl.xlabel("Length of ST Lines")
+pltl.show(dpi=300)
